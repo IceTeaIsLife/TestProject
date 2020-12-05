@@ -30,8 +30,8 @@ public class SwaggerConfiguration {
 
         List<VendorExtension> vext = new ArrayList<>();
         ApiInfo apiInfo = new ApiInfo(
-                "Introduction to integration",
-                "SAS Web-service for testing",
+                "Introduction to MIREA",
+                "MIREA Web-service for testing",
                 "1.0",
                 "...",
                 contact,

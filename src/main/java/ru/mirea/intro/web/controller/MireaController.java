@@ -9,7 +9,7 @@ import ru.mirea.intro.web.to.RequestDto;
 import ru.mirea.intro.web.to.Response;
 
 @RestController
-@RequestMapping("api/mirea")
+@RequestMapping("/api/mirea")
 public class MireaController {
 
     private final TestService testService;
