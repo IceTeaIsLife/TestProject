@@ -1,10 +1,10 @@
 package ru.mirea.intro.service;
 
-
-import ru.mirea.intro.web.to.RequestDto;
+import ru.mirea.intro.exception.NoSuchRequest;
+import ru.mirea.intro.service.model.Request;
 
 public interface TestService {
-    RequestDto testServiceGetMethod(Long id);
+    Request testServiceGetMethod(Long id) throws NoSuchRequest;
 
-    String testServicePostMethod(RequestDto requestDto);
+    String testServicePostMethod(Request request);
 }
