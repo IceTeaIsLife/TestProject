@@ -35,11 +35,10 @@ class TestServiceImplTest {
     @Transactional
     void testServiceGetMethod() throws NoSuchRequest {
         List<Book> bookList = new ArrayList<>();
-        bookList.add(new Book(16L, "Толстой", "Война и мир"));
-        Request request = new Request(252L, "Первый запрос", bookList);
-        Assertions.assertEquals(request, testService.testServiceGetMethod(252L));
+        bookList.add(new Book(17L, "Толстой", "Война и мир"));
+        Request request = new Request(404L, "Первый запрос", bookList);
+        Assertions.assertEquals(request, testService.testServiceGetMethod(404L));
     }
-
 
     @DisplayName("Testing for normal post")
     @Test
@@ -49,5 +48,22 @@ class TestServiceImplTest {
         bookList.add(new Book(456L, "Толстой Тест 123", "Война и Мир Тест 123"));
         Request request = new Request(new Random().nextLong(), "Второй запрос из теста", bookList);
         Assertions.assertEquals("Successfully inserted row!", testService.testServicePostMethod(request));
+    }
+
+    @DisplayName("Testing for normal delete")
+    @Test
+    @Transactional
+    void testServiceDeleteMethod() throws NoSuchRequest {
+        Assertions.assertEquals("Removal is successful!", testService.testServiceDeleteMethod(404L));
+    }
+
+    @DisplayName("Testing for normal response of PUT-method")
+    @Test
+    @Transactional
+    void testServicePutMethod() throws NoSuchRequest {
+        List<Book> bookList = new ArrayList<>();
+        bookList.add(new Book(17L, "Толстой", "Война и мир"));
+        Request request = new Request(404L, "Первый запрос", bookList);
+        Assertions.assertEquals("Database successfully updated!", testService.testServicePutMethod(request));
     }
 }
