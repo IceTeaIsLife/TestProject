@@ -2,6 +2,7 @@ package ru.mirea.intro.web.controller;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -26,8 +27,12 @@ public class MireaController {
     }
 
     @PostMapping("/post-method")
-    @ApiOperation(value = "POST-метод тестового веб-сервиса",  notes = "Отправление POST-запроса\nВходные параметры:\n - RequestDto requestDto\n - Optional<String> optionalStringValue")
-    public ResponseEntity<Response<String>> postMethod(@RequestBody RequestDto requestDto, @RequestParam Optional<String> optionalStringValue) {
+    @ApiOperation(value = "POST-метод тестового веб-сервиса",  notes = "Отправление POST-запроса")
+            //"\nВходные параметры:\n - RequestDto requestDto\n - Optional<String> optionalStringValue")
+    public ResponseEntity<Response<String>> postMethod(@ApiParam(value = "Тело запроса - список книг и значение типа String", required = true)
+                                                           @RequestBody RequestDto requestDto,
+                                                       @ApiParam(value = "Опциональный параметр", required = false)
+                                                       @RequestParam Optional<String> optionalStringValue) {
         try {
             Request request = RequestMapper.REQUEST_MAPPER.requestDTOToRequest(requestDto);
             String testServiceResponse = testService.testServicePostMethod(request);
@@ -38,8 +43,10 @@ public class MireaController {
     }
 
     @GetMapping("/get-method")
-    @ApiOperation(value = "GET-метод тестового веб-сервиса",  notes = "Отправление GET-запроса\nВходные параметры:\n - Long id")
-    public ResponseEntity<Response<RequestDto>> getMethod(@RequestParam Long id) {
+    @ApiOperation(value = "GET-метод тестового веб-сервиса",  notes = "Отправление GET-запроса")
+            //"\nВходные параметры:\n - Long id")
+    public ResponseEntity<Response<RequestDto>> getMethod(@ApiParam(value = "Id запроса в базе данных", required = true)
+                                                            @RequestParam Long id) {
         try {
             Request request = testService.testServiceGetMethod(id);
             RequestDto requestDto = RequestMapper.REQUEST_MAPPER.requestToRequestDto(request);
@@ -50,8 +57,10 @@ public class MireaController {
     }
 
     @DeleteMapping("/delete-method")
-    @ApiOperation(value = "DELETE-метод тестового веб-сервиса",  notes = "Отправление DELETE-запроса\nВходные параметры:\n - Long id")
-    public ResponseEntity<Response<String>> deleteMethod(@RequestParam Long id)
+    @ApiOperation(value = "DELETE-метод тестового веб-сервиса",  notes = "Отправление DELETE-запроса")
+            //"\nВходные параметры:\n - Long id")
+    public ResponseEntity<Response<String>> deleteMethod(@ApiParam(value = "Id запроса в базе данных", required = true)
+                                                             @RequestParam Long id)
     {
         try{
             String testServiceResponse = testService.testServiceDeleteMethod(id);
@@ -62,8 +71,10 @@ public class MireaController {
     }
 
     @PutMapping("/put-method")
-    @ApiOperation(value = "PUT-метод тестового веб-сервиса",  notes = "Отправление PUT-запроса\nВходные параметры:\n - RequestDto requestDto")
-    public ResponseEntity<Response<String>> putMethod(@RequestBody RequestDto requestDto)
+    @ApiOperation(value = "PUT-метод тестового веб-сервиса",  notes = "Отправление PUT-запроса")
+            //"\nВходные параметры:\n - RequestDto requestDto")
+    public ResponseEntity<Response<String>> putMethod(@ApiParam(value = "Тело запроса - список книг и значение типа String", required = true)
+                                                          @RequestBody RequestDto requestDto)
     {
         try{
             Request request = RequestMapper.REQUEST_MAPPER.requestDTOToRequest(requestDto);
