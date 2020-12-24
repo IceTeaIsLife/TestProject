@@ -28,6 +28,10 @@ public class TestServiceImpl implements TestService {
     @Override
     public String testServicePostMethod(Request request) {
         RequestDAO requestDAO = RequestMapper.REQUEST_MAPPER.requestToRequestDAO(request);
+        requestDAO.getBookDaoList().forEach(bookDao -> bookDao.setRequestDao(requestDAO));
+//        for (BookDao bookDao : requestDAO.getBookDaoList()) {
+//            bookDao.setRequestDao(requestDAO);
+//        }
         requestRepository.save(requestDAO);
         return "Successfully inserted row!";
     }

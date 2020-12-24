@@ -5,37 +5,36 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
 import java.util.Objects;
 
 @AllArgsConstructor
 @Getter
 @Setter
 @NoArgsConstructor
-public class Request {
+public class Book {
     private Long id;
-    private String requestValue;
-    private List<Book> bookList;
+    private String author;
+    private String name;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Request request = (Request) o;
-        return Objects.equals(id, request.id) && Objects.equals(requestValue, request.requestValue) && Objects.equals(bookList, request.bookList);
+        Book book = (Book) o;
+        return Objects.equals(id, book.id) && Objects.equals(author, book.author) && Objects.equals(name, book.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, requestValue, bookList);
+        return Objects.hash(id, author, name);
     }
 
     @Override
     public String toString() {
-        return "Request{" +
+        return "Book{" +
                 "id=" + id +
-                ", requestValue='" + requestValue + '\'' +
-                ", bookList=" + bookList +
+                ", author='" + author + '\'' +
+                ", name='" + name + '\'' +
                 '}';
     }
 }

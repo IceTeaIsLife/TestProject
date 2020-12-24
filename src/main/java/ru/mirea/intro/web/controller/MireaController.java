@@ -10,6 +10,8 @@ import ru.mirea.intro.web.to.Meta;
 import ru.mirea.intro.web.to.RequestDto;
 import ru.mirea.intro.web.to.Response;
 
+import java.util.Optional;
+
 @RestController
 @RequestMapping("api/mirea")
 public class MireaController {
@@ -20,7 +22,7 @@ public class MireaController {
     }
 
     @PostMapping("/post-method")
-    public ResponseEntity<Response<String>> postMethod(@RequestBody RequestDto requestDto) {
+    public ResponseEntity<Response<String>> postMethod(@RequestBody RequestDto requestDto, @RequestParam Optional<String> optionalStringValue) {
         try {
             Request request = RequestMapper.REQUEST_MAPPER.requestDTOToRequest(requestDto);
             String testServiceResponse = testService.testServicePostMethod(request);
@@ -40,4 +42,17 @@ public class MireaController {
             return new ResponseEntity<>(new Response<>(new Meta(1, e.toString()), null), HttpStatus.CONFLICT);
         }
     }
+/*
+    @PutMapping("/put-method")
+    public ResponseEntity<Response<String>> putMethod(@RequestBody RequestDto requestDto)
+    {
+        try{
+            return null;
+        }
+        catch (Exception e){
+            return new ResponseEntity<>(new Response<>(new Meta(1, e.toString()), null), HttpStatus.CONFLICT);
+        }
+    }
+
+ */
 }
