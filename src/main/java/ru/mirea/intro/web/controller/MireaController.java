@@ -26,7 +26,7 @@ public class MireaController {
     }
 
     @PostMapping("/post-method")
-    @ApiOperation(value = "POST-метод тестового веб-сервиса",  notes = "Отправление POST-запроса")
+    @ApiOperation(value = "POST-метод тестового веб-сервиса",  notes = "Отправление POST-запроса\nВходные параметры:\n - RequestDto requestDto\n - Optional<String> optionalStringValue")
     public ResponseEntity<Response<String>> postMethod(@RequestBody RequestDto requestDto, @RequestParam Optional<String> optionalStringValue) {
         try {
             Request request = RequestMapper.REQUEST_MAPPER.requestDTOToRequest(requestDto);
@@ -38,7 +38,7 @@ public class MireaController {
     }
 
     @GetMapping("/get-method")
-    @ApiOperation(value = "GET-метод тестового веб-сервиса",  notes = "Отправление GET-запроса")
+    @ApiOperation(value = "GET-метод тестового веб-сервиса",  notes = "Отправление GET-запроса\nВходные параметры:\n - Long id")
     public ResponseEntity<Response<RequestDto>> getMethod(@RequestParam Long id) {
         try {
             Request request = testService.testServiceGetMethod(id);
@@ -50,7 +50,7 @@ public class MireaController {
     }
 
     @DeleteMapping("/delete-method")
-    @ApiOperation(value = "DELETE-метод тестового веб-сервиса",  notes = "Отправление DELETE-запроса")
+    @ApiOperation(value = "DELETE-метод тестового веб-сервиса",  notes = "Отправление DELETE-запроса\nВходные параметры:\n - Long id")
     public ResponseEntity<Response<String>> deleteMethod(@RequestParam Long id)
     {
         try{
@@ -62,7 +62,7 @@ public class MireaController {
     }
 
     @PutMapping("/put-method")
-    @ApiOperation(value = "PUT-метод тестового веб-сервиса",  notes = "Отправление PUT-запроса")
+    @ApiOperation(value = "PUT-метод тестового веб-сервиса",  notes = "Отправление PUT-запроса\nВходные параметры:\n - RequestDto requestDto")
     public ResponseEntity<Response<String>> putMethod(@RequestBody RequestDto requestDto)
     {
         try{

@@ -50,11 +50,27 @@ class TestServiceImplTest {
         Assertions.assertEquals("Successfully inserted row!", testService.testServicePostMethod(request));
     }
 
+    @DisplayName("Testing for NoSuchRequest for DELETE-method")
+    @Test
+    void testServiceDeleteMethodException() {
+        Assertions.assertThrows(NoSuchRequest.class, () -> testService.testServiceDeleteMethod(1234L)
+        );
+    }
+
     @DisplayName("Testing for normal delete")
     @Test
     @Transactional
     void testServiceDeleteMethod() throws NoSuchRequest {
         Assertions.assertEquals("Removal is successful!", testService.testServiceDeleteMethod(404L));
+    }
+
+    @DisplayName("Testing for NoSuchRequest for PUT-method")
+    @Test
+    void testServicePutMethodException() {
+        List<Book> bookList = new ArrayList<>();
+        bookList.add(new Book(17L, "Толстой", "Война и мир"));
+        Request request = new Request(202L, "Первый запрос", bookList);
+        Assertions.assertThrows(NoSuchRequest.class, () -> testService.testServicePutMethod(request));
     }
 
     @DisplayName("Testing for normal response of PUT-method")

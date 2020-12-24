@@ -43,7 +43,7 @@ public class TestServiceImpl implements TestService {
         if (requestRepository.existsById(id)){
             requestRepository.deleteById(id);
             return "Removal is successful!";
-        };
+        }
         throw new NoSuchRequest();
     }
 
