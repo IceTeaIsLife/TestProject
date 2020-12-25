@@ -19,5 +19,6 @@ public class RequestDAO {
     @Column(name = "request_value")
     private String requestValue;
     @OneToMany(mappedBy = "requestDao", cascade = CascadeType.ALL, orphanRemoval = true)
+    @org.hibernate.annotations.OrderBy(clause = "id DESC")
     private List<BookDao> bookDaoList;
 }

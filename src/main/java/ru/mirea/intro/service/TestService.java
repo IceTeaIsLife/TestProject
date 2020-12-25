@@ -7,9 +7,9 @@ import ru.mirea.intro.web.to.RequestDto;
 public interface TestService {
     Request testServiceGetMethod(Long id) throws NoSuchRequest;
 
-    String testServicePostMethod(Request request);
+    Request testServicePostMethod(Request request);
 
     String testServiceDeleteMethod(Long id) throws NoSuchRequest;
 
-    String testServicePutMethod(Request request) throws NoSuchRequest;
+    Request testServicePutMethod(Request request) throws NoSuchRequest;
 }

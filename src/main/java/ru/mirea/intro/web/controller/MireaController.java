@@ -29,14 +29,14 @@ public class MireaController {
     @PostMapping("/post-method")
     @ApiOperation(value = "POST-метод тестового веб-сервиса",  notes = "Отправление POST-запроса")
             //"\nВходные параметры:\n - RequestDto requestDto\n - Optional<String> optionalStringValue")
-    public ResponseEntity<Response<String>> postMethod(@ApiParam(value = "Тело запроса - список книг и значение типа String", required = true)
+    public ResponseEntity<Response<RequestDto>> postMethod(@ApiParam(value = "Тело запроса - список книг и значение типа String", required = true)
                                                            @RequestBody RequestDto requestDto,
                                                        @ApiParam(value = "Опциональный параметр", required = false)
                                                        @RequestParam Optional<String> optionalStringValue) {
         try {
             Request request = RequestMapper.REQUEST_MAPPER.requestDTOToRequest(requestDto);
-            String testServiceResponse = testService.testServicePostMethod(request);
-            return new ResponseEntity<>(new Response<>(new Meta(0, "All good!"), testServiceResponse), HttpStatus.OK);
+            RequestDto requestDtoOut = RequestMapper.REQUEST_MAPPER.requestToRequestDto(testService.testServicePostMethod(request));
+            return new ResponseEntity<>(new Response<>(new Meta(0, "All good!"), requestDtoOut), HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(new Response<>(new Meta(1, e.toString()), null), HttpStatus.CONFLICT);
         }
@@ -73,13 +73,13 @@ public class MireaController {
     @PutMapping("/put-method")
     @ApiOperation(value = "PUT-метод тестового веб-сервиса",  notes = "Отправление PUT-запроса")
             //"\nВходные параметры:\n - RequestDto requestDto")
-    public ResponseEntity<Response<String>> putMethod(@ApiParam(value = "Тело запроса - список книг и значение типа String", required = true)
+    public ResponseEntity<Response<RequestDto>> putMethod(@ApiParam(value = "Тело запроса - список книг и значение типа String", required = true)
                                                           @RequestBody RequestDto requestDto)
     {
         try{
             Request request = RequestMapper.REQUEST_MAPPER.requestDTOToRequest(requestDto);
-            String testServiceResponse = testService.testServicePutMethod(request);
-            return new ResponseEntity<>(new Response<>(new Meta(0, "All good!"), testServiceResponse), HttpStatus.OK);
+            RequestDto requestDtoOut = RequestMapper.REQUEST_MAPPER.requestToRequestDto(testService.testServicePutMethod(request));
+            return new ResponseEntity<>(new Response<>(new Meta(0, "All good!"), requestDtoOut), HttpStatus.OK);
         }
         catch (Exception e){
             return new ResponseEntity<>(new Response<>(new Meta(1, e.toString()), null), HttpStatus.NOT_FOUND);
