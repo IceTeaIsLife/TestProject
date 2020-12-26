@@ -86,4 +86,11 @@ public class MireaController {
         }
     }
 
+    @GetMapping("/health-check")
+    @ApiOperation(value="Метод проверки работоспособности приложения", notes = "Отправка пустого GET-запроса")
+    public ResponseEntity<Response<String>> healthCheck()
+    {
+        return new ResponseEntity<>(new Response<>(new Meta(0, "All good!"), "App is up!"), HttpStatus.OK);
+    }
+
 }
